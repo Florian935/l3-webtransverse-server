@@ -1,4 +1,3 @@
-  
 import { merge } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
 
@@ -8,13 +7,13 @@ import {
 } from './schema/user.schema';
 
 import {
-    typeDef as Categorie,
-    resolvers as categorieResolvers,
+  typeDef as Categorie,
+  resolvers as categorieResolvers,
 } from './schema/categorie.schema';
 
 import {
-    typeDef as Book,
-    resolvers as bookResolvers,
+  typeDef as Book,
+  resolvers as bookResolvers,
 } from './schema/book.schema';
 
 const Query = `
@@ -33,6 +32,6 @@ const resolvers = {};
 
 // Do not forget to merge at the end of typeDefs and resolvers
 export const schema = makeExecutableSchema({
-  typeDefs: [ Query, User, Categorie, Book ],
+  typeDefs: [Query, User, Categorie, Book],
   resolvers: merge(resolvers, userResolvers, categorieResolvers, bookResolvers),
 });

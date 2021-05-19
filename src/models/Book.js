@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
-import { Categorie } from './Categorie';
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
+const bookSchema = new Schema(
+  {
     name: String,
     description: String,
-    categories: [Categorie]
-});
+    categories: { type: Schema.Types.ObjectId, ref: 'Categorie' },
+  },
+  { collection: 'Book' }
+);
 
 export const Book = mongoose.model('Book', bookSchema);
