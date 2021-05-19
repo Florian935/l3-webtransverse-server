@@ -28,7 +28,7 @@ export const typeDef = `
     }
 
     extend type Mutation {
-        createUser(name: String!,pseudo: String!): String
+        createUser(name: String!,surname: String!): String
         createUserWithInput(input: UserInput!): User
         deleteUser(_id: ID!): Boolean
         updateUser(_id: ID!, input: UserInput!): User
@@ -73,7 +73,9 @@ export const resolvers = {
     },
 
     deleteUser: async (root, { _id }, context, info) => {
-      return User.remove({ _id });
+      const { deletedCount } = await User.deleteOne({ _id });
+
+      return deletedCount === 0 ? false : true;
     },
 
     updateUser: async (root, { _id, input }) => {
