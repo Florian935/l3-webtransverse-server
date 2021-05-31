@@ -43,23 +43,11 @@ export const resolvers = {
     },
 
     users: async () => {
-      let users = [];
-      for (let index = 0; index < 5; index++) {
-        users.push(
-          dummy(User, {
-            ignore: ignoredFields,
-            returnDate: false,
-          })
-        );
-      }
-      return users;
+      return User.find();
     },
 
     user: async (root, { _id }, context, info) => {
-      return dummy(User, {
-        ignore: ignoredFields,
-        returnDate: false,
-      });
+      return User.findById(_id);
     },
   },
   Mutation: {
