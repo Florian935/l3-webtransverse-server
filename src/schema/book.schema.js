@@ -22,7 +22,7 @@ export const typeDef = `
     }
 
     extend type Mutation {
-        createBook(name: String!, description: String!): Boolean
+        createBook(name: String!, description: String!): String
         createBookWithInput(input: BookInput!): Book
         deleteBook(_id: ID!): Boolean
         updateBook(_id: ID!, input: BookInput!): Book
@@ -36,16 +36,7 @@ export const resolvers = {
     },
 
     books: async () => {
-      let books = [];
-      for (let index = 0; index < 5; index++) {
-        books.push(
-          dummy(Book, {
-            ignore: ignoredFields,
-            returnDate: false,
-          })
-        );
-      }
-      return users;
+      return Book.find();
     },
 
     book: async (root, { _id }, context, info) => {
