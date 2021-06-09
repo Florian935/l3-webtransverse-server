@@ -57,7 +57,9 @@ export const resolvers = {
     },
 
     deleteBook: async (root, { _id }, context, info) => {
-      return Book.remove({ _id });
+      const { deletedCount } = await Book.deleteOne({ _id });
+
+      return deletedCount === 0 ? false : true;
     },
 
     updateBook: async (root, { _id, input }) => {
