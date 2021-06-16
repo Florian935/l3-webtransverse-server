@@ -9,7 +9,6 @@ export const typeDef = `
         surname: String
         login: String
         pass: String
-        token: String
         books: [Book]
     }
 
@@ -18,7 +17,6 @@ export const typeDef = `
         surname: String
         login: String
         pass: String
-        token: String
     }
 
     extend type Query {
@@ -29,7 +27,7 @@ export const typeDef = `
 
     extend type Mutation {
         createUser(name: String!,surname: String!): String
-        createUserWithInput(input: UserInput!): User
+        createUserWithInput(input: UserInput!): String
         deleteUser(_id: ID!): Boolean
         updateUser(_id: ID!, input: UserInput!): User
         addBook(_id: ID!, book: BookInput): User
@@ -57,7 +55,9 @@ export const resolvers = {
     },
 
     createUserWithInput: async (root, { input }, context, info) => {
-      return User.create(input);
+      await User.create(input);
+
+      return User.name;
     },
 
     deleteUser: async (root, { _id }, context, info) => {
