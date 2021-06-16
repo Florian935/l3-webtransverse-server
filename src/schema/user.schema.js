@@ -29,7 +29,7 @@ export const typeDef = `
         createUser(name: String!,surname: String!): String
         createUserWithInput(input: UserInput!): String
         deleteUser(_id: ID!): Boolean
-        updateUser(_id: ID!, input: UserInput!): User
+        updateUser(_id: ID!, input: UserInput!): String
         addBook(_id: ID!, book: BookInput): User
     }
 `;
@@ -67,7 +67,9 @@ export const resolvers = {
     },
 
     updateUser: async (root, { _id, input }) => {
-      return User.findByIdAndUpdate(_id, input, { new: true });
+      await User.findByIdAndUpdate(_id, input, { new: true });
+
+      return User.name;
     },
 
     addBook: async (root, { _id, book }) => {
