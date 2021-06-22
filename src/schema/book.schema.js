@@ -25,7 +25,7 @@ export const typeDef = `
         createBook(name: String!, description: String!): String
         createBookWithInput(input: BookInput!): Book
         deleteBook(_id: ID!): Boolean
-        updateBook(_id: ID!, input: BookInput!): Book
+        updateBook(_id: ID!, input: BookInput!): String
     }
 `;
 
@@ -63,7 +63,9 @@ export const resolvers = {
     },
 
     updateBook: async (root, { _id, input }) => {
-      return Book.findByIdAndUpdate(_id, input, { new: true });
+      await Book.findByIdAndUpdate(_id, input, { new: true });
+
+      return Book.name;
     },
   },
 };
